@@ -207,6 +207,7 @@ namespace asiotap
 							result[name] = name;
 						}
 					}
+					/* FALLTHROUGH */
 					case tap_adapter_layer::ip:
 					{
 						if (name.substr(0, 3) == "tun")

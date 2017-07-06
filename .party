@@ -69,55 +69,14 @@ Attendee('boost').get_build('msvc-x64').commands = [
 ]
 
 # OpenSSL
-Attendee('openssl', filter=~f('linux'))
+Attendee('openssl')
 Attendee('openssl').add_source('http://www.openssl.org/source/openssl-1.0.2g.tar.gz')
 
-Attendee('openssl').add_build('osx', environment='system', filter='darwin')
-Attendee('openssl').get_build('osx').commands = [
-    './Configure no-shared no-asm --prefix={{prefix}} darwin64-x86_64-cc',
+Attendee('openssl').add_build('linux', environment='system', filter='linux')
+Attendee('openssl').get_build('linux').commands = [
+    './config no-shared no-asm --prefix={{prefix}}',
     'make',
     'make install',
-]
-
-Attendee('openssl').add_post_unpack_command(r'xcopy {{root}}\third-party\patches\openssl1.0.2g\* . /S /Y', filter='windows')
-
-Attendee('openssl').add_build('msvc-x86', environment='system', filter='msvc-x86', prefix='x86/Release')
-Attendee('openssl').get_build('msvc-x86').commands = [
-    r'perl Configure VC-WIN32 no-asm --prefix={{prefix}}',
-    r'ms\do_ms',
-    r'nmake -f ms\ntdll.mak',
-    r'nmake -f ms\ntdll.mak install',
-    r'xcopy out32dll\libeay32.pdb {{prefix}}\bin\ /S /Y',
-    r'xcopy out32dll\ssleay32.pdb {{prefix}}\bin\ /S /Y',
-]
-Attendee('openssl').add_build('msvc-x86-debug', environment='system', filter='msvc-x86', prefix='x86/Debug')
-Attendee('openssl').get_build('msvc-x86-debug').commands = [
-    r'perl Configure debug-VC-WIN32 no-asm --prefix={{prefix}}',
-    r'ms\do_ms',
-    r'nmake -f ms\ntdll.mak',
-    r'nmake -f ms\ntdll.mak install',
-    r'xcopy out32dll.dbg\libeay32.pdb {{prefix}}\bin\ /S /Y',
-    r'xcopy out32dll.dbg\ssleay32.pdb {{prefix}}\bin\ /S /Y',
-]
-
-Attendee('openssl').add_build('msvc-x64', environment='system', filter='msvc-x64', prefix='x64/Release')
-Attendee('openssl').get_build('msvc-x64').commands = [
-    r'perl Configure VC-WIN64A no-asm --prefix={{prefix}}',
-    r'ms\do_win64a',
-    r'nmake -f ms\ntdll.mak',
-    r'nmake -f ms\ntdll.mak install',
-    r'xcopy out32dll\libeay32.pdb {{prefix}}\bin\ /S /Y',
-    r'xcopy out32dll\ssleay32.pdb {{prefix}}\bin\ /S /Y',
-]
-
-Attendee('openssl').add_build('msvc-x64-debug', environment='system', filter='msvc-x64', prefix='x64/Debug')
-Attendee('openssl').get_build('msvc-x64-debug').commands = [
-    r'perl Configure debug-VC-WIN64A no-asm --prefix={{prefix}}',
-    r'ms\do_win64a',
-    r'nmake -f ms\ntdll.mak',
-    r'nmake -f ms\ntdll.mak install',
-    r'xcopy out32dll.dbg\libeay32.pdb {{prefix}}\bin\ /S /Y',
-    r'xcopy out32dll.dbg\ssleay32.pdb {{prefix}}\bin\ /S /Y',
 ]
 
 # cURL

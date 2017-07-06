@@ -123,7 +123,7 @@ namespace netlinkplus
 				return size();
 			}
 
-			friend bool operator==(const netlink_endpoint& lhs, const netlink_endpoint& rhs)
+			/* friend bool operator==(const netlink_endpoint& lhs, const netlink_endpoint& rhs)
 			{
 				return (lhs.m_sockaddr == rhs.m_sockaddr);
 			}
@@ -136,7 +136,7 @@ namespace netlinkplus
 			friend bool operator<(const netlink_endpoint& lhs, const netlink_endpoint& rhs)
 			{
 				return (lhs.m_sockaddr < rhs.m_sockaddr);
-			}
+			} */
 
 		private:
 

@@ -567,7 +567,7 @@ int main(int argc, char** argv)
 	catch (std::exception& ex)
 	{
 		do_log(fscp::log_level::error, ex.what());
-
+		std::cerr << boost::diagnostic_information(ex);
 		return EXIT_FAILURE;
 	}
 
